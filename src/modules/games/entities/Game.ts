@@ -10,6 +10,9 @@ class Game {
   title: string;
 
   @Column()
+  publisherId: string;
+
+  @Column()
   categories: string;
 
   @Column()

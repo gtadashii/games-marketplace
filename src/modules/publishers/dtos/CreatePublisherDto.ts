@@ -1,4 +1,5 @@
 class CreatePublisherDto {
+  id?: string;
   name: string;
 }
 
