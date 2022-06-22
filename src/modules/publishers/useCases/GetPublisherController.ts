@@ -8,9 +8,6 @@ class GetPublisherController {
     const { id } = request.params;
     const getPublisherUseCase = container.resolve(GetPublisherUseCase);
     const publisher = await getPublisherUseCase.execute(id);
-
-    if (!publisher) return response.status(404).send();
-
     return response.status(200).json(publisher);
   }
 }

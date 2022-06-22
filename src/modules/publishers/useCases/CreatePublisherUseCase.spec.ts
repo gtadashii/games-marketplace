@@ -1,5 +1,5 @@
 import { PublishersRepositoryInMemory } from "../repositories/PublishersRepositoryInMemory";
-import { AppError } from "shared/errors/AppError";
+import { AppError } from "../../../shared/errors/AppError";
 
 import { CreatePublisherUseCase } from "./CreatePublisherUseCase";
 
@@ -17,5 +17,17 @@ describe("create publisher test", () => {
       name: "Konami"
     });
     expect(publisher).toHaveProperty("id");
+  });
+
+  it("should inform that publisher already exists", async () => {
+    await createPublisherUseCase.execute({
+      name: "Nintendo"
+    });
+
+    await expect(
+      createPublisherUseCase.execute({
+        name: "Nintendo"
+      })
+    ).rejects.toEqual(new AppError("Publisher already exists"))
   })
 })

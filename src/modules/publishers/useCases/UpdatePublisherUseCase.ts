@@ -18,12 +18,12 @@ class UpdatePublisherUseCase {
   async execute ({ id, name }: RequestInterface): Promise<void> {
     const publisher = await this.publisherRepository.findById(id);
     if (!publisher) {
-      throw new AppError(`Publisher of id ${id} not found`);
+      throw new AppError(`Publisher of id ${id} not found`, 404);
     }
     try {
       await this.publisherRepository.updateName(id, name);
     } catch (err) {
-      throw new AppError(`Error while updating publisher of id ${id} - `, err);
+      throw new AppError(`Error while updating publisher of id ${id} - ${err}`);
     }
   }
 }
